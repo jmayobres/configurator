@@ -17,7 +17,7 @@ class Configuration {
       _scopes.sorted((a, b) => a.weight.compareTo(b.weight));
 
   Color colorValue(String id) {
-    return Color(int.parse(color(id).substring(1, 7), radix: 16));
+    return const Color(0xFFFF9000);
   }
 
   ConfigScope get _currentScope => _scopes.last;
