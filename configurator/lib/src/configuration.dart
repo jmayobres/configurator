@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:configurator/configurator.dart';
 import 'package:configurator/src/utils/change_notifier.dart';
 import 'package:collection/collection.dart';
@@ -13,6 +15,10 @@ class Configuration {
 
   List<ConfigScope> get _scopesSorted =>
       _scopes.sorted((a, b) => a.weight.compareTo(b.weight));
+
+  Color colorValue(String id) {
+    return Color(int.parse(color(id).substring(1, 7), radix: 16));
+  }
 
   ConfigScope get _currentScope => _scopes.last;
 
@@ -82,11 +88,11 @@ class Configuration {
   }
 
   Future<void> removeLastScopeWhere(
-      PopScopePredicate predicate, {
-        bool notify = true,
-      }) async {
+    PopScopePredicate predicate, {
+    bool notify = true,
+  }) async {
     var idx = _scopes.lastIndexWhere((scope) => predicate(scope));
-    
+
     if (idx > -1) {
       _scopes.removeAt(idx);
     }
@@ -101,7 +107,8 @@ class Configuration {
   bool flag(String id) {
     return _scopesSorted.reversed.firstWhereOrNull((s) {
           return s.flags.containsKey(id);
-        })?.flags[id] == true;
+        })?.flags[id] ==
+        true;
   }
 
   String color(String id) {

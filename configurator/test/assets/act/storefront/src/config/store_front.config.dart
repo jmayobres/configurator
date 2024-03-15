@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:configurator/configurator.dart';
 
 // ********************************
