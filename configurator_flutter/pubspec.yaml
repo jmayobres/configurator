@@ -26,7 +26,10 @@ dependencies:
   slang_flutter: ^3.0.0
 
   configurator:
-    path: ../configurator
+    git:
+      url: https://github.com/jmayobres/configurator.git
+      ref: main
+      path: configurator
 
 dev_dependencies:
   flutter_test:
