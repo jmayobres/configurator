@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:test/test.dart';
@@ -21,9 +19,7 @@ extension ConvExt on String {
 }
 
 void main() {
-
-  group( 'flutter pub run tests', () {
-
+  group('flutter pub run tests', () {
     test('Graph Add Edge Test', () {
       final graph = Graph<int?>();
 
@@ -46,18 +42,17 @@ void main() {
       expect(graph.to(3), {1, 2});
     });
 
-    test( 'DartScriptGen.execute Builds Correctly', () async {
-
-      var base = File( baseFile.yaml2dart );
-      var part1 = File( partFile1.yaml2dart );
-      var part2 = File( partFile2.yaml2dart );
-      var part3 = File( partFile3.yaml2dart );
-      var part4 = File( partFile4.yaml2dart );
-      var part5 = File( partFile5.yaml2dart );
+    test('DartScriptGen.execute Builds Correctly', () async {
+      var base = File(baseFile.yaml2dart);
+      var part1 = File(partFile1.yaml2dart);
+      var part2 = File(partFile2.yaml2dart);
+      var part3 = File(partFile3.yaml2dart);
+      var part4 = File(partFile4.yaml2dart);
+      var part5 = File(partFile5.yaml2dart);
 
       void deleteFiles() {
-        for ( var file in [ base, part1, part2, part3, part4, part5 ] ) {
-          if ( file.existsSync() ) {
+        for (var file in [base, part1, part2, part3, part4, part5]) {
+          if (file.existsSync()) {
             file.deleteSync();
           }
         }
@@ -69,24 +64,22 @@ void main() {
         '--id-filter=base,part1,part2,part3,part4,part5',
       ]);
 
-      expect( base.existsSync(), isTrue );
-      expect( part1.existsSync(), isFalse );
-      expect( part2.existsSync(), isFalse );
-      expect( part3.existsSync(), isFalse );
-      expect( part4.existsSync(), isFalse );
-      expect( part5.existsSync(), isFalse );
+      expect(base.existsSync(), isTrue);
+      expect(part1.existsSync(), isFalse);
+      expect(part2.existsSync(), isFalse);
+      expect(part3.existsSync(), isFalse);
+      expect(part4.existsSync(), isFalse);
+      expect(part5.existsSync(), isFalse);
 
       deleteFiles();
-
     });
 
-    test( 'DartScriptGen.execute Builds Array Correctly', () async {
-
-      var base = File( testYaml1array.yaml2dart );
+    test('DartScriptGen.execute Builds Array Correctly', () async {
+      var base = File(testYaml1array.yaml2dart);
 
       void deleteFiles() {
-        for ( var file in [ base ] ) {
-          if ( file.existsSync() ) {
+        for (var file in [base]) {
+          if (file.existsSync()) {
             file.deleteSync();
           }
         }
@@ -98,14 +91,12 @@ void main() {
         '--id-filter=test_1_array',
       ]);
 
-      expect( base.existsSync(), isTrue );
+      expect(base.existsSync(), isTrue);
 
       // deleteFiles();
-
     });
 
-    test( 'Slang Graph Test', () {
-
+    test('Slang Graph Test', () {
       String? namespace = 'personal.gettingStarted';
 
       Map<String, dynamic> translationsMap = {
@@ -116,25 +107,20 @@ void main() {
 
       Map<String, dynamic> result = {};
 
-      if ( namespace != null && namespace.isNotEmpty == true ) {
-        var namespaces = namespace.split( '.' );
+      if (namespace != null && namespace.isNotEmpty == true) {
+        var namespaces = namespace.split('.');
 
         String last = '';
 
-        for ( var ns in namespaces ) {
-          graph.addEdge( last, ns );
+        for (var ns in namespaces) {
+          graph.addEdge(last, ns);
           last = ns;
         }
       } else {
-        graph.addEdge( '', namespace );
+        graph.addEdge('', namespace);
       }
 
-
-
       print(graph.toDebugString());
-
     });
-
   });
-
 }

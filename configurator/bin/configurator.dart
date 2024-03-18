@@ -126,7 +126,6 @@ Future<void> applyDefinitions({
         writeDefsToFile(config, flagsMap, 'flags');
       }
     }
-
   }
 }
 
@@ -216,8 +215,8 @@ void writeDefsToFile(
     List<String> result = [];
 
     for (var entry in map.entries) {
-      List<String> _keys = List.from(keys);
-      _keys.add(entry.key);
+      List<String> keys0 = List.from(keys);
+      keys0.add(entry.key);
 
       if (entry.value is Map) {
         var padding = List.filled(2 * depth, ' ').join();
@@ -234,7 +233,7 @@ void writeDefsToFile(
           expandDefMap(
             entry.value,
             result,
-            _keys,
+            keys0,
             depth + 1,
             quoteWrap,
           ),
@@ -245,7 +244,7 @@ void writeDefsToFile(
 
         var oldLine = getCurrentLineIfExists('$padding${entry.key}');
 
-        var keyPart = '&${_keys.join('.').canonicalize}';
+        var keyPart = '&${keys0.join('.').canonicalize}';
         var newLine = '$padding${entry.key}: $keyPart $value';
 
         if (oldLine == null) {

@@ -6,6 +6,6 @@ extension DynamicCasting on dynamic {
 
 extension YamlSettingList on List<YamlSetting> {
   List<YamlSetting<K, V>> convert<K, V>() {
-    return map((e) => YamlSetting<K, V>( e.name as K, e.value as V)).toList();
+    return map((e) => YamlSetting<K, V>(e.name as K, e.value as V)).toList();
   }
 }

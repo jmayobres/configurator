@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'path_utils.dart';
 
-
 class FileUtils {
   static void writeFile({required String path, required String content}) {
     File(path).writeAsStringSync(content);
@@ -37,7 +36,8 @@ class FileUtils {
     do {
       final dirList = queue.removeFirst().listSync(recursive: false);
       for (final FileSystemEntity entity in dirList) {
-        if (entity is File && ( extension.isEmpty || entity.path.contains( extension ) ) ) {
+        if (entity is File &&
+            (extension.isEmpty || entity.path.contains(extension))) {
           result.add(entity);
         } else if (entity is Directory) {
           final fileName = PathUtils.getFileName(entity.path);

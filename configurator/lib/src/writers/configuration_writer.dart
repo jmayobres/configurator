@@ -205,10 +205,11 @@ class ConfigWriter extends Writer {
                     return '\'${f.value}\'';
                   } else if (f.value is List) {
                     return '[${(f.value as List).map((v) {
-
                       dynamic tryFindTranslation(dynamic input) {
                         if (input is List) {
-                          return input.map((e) => tryFindTranslation(e)).toList();
+                          return input
+                              .map((e) => tryFindTranslation(e))
+                              .toList();
                         } else if (input is Map) {
                           return input.map((key, value) {
                             return MapEntry(key, tryFindTranslation(value));
@@ -276,7 +277,8 @@ class ConfigWriter extends Writer {
 
               for (var f in routes) {
                 if (map.keys.contains(f.id)) {
-                  throw Exception('Duplicate Route ID Detected: (${f.id} : ${f.path})');
+                  throw Exception(
+                      'Duplicate Route ID Detected: (${f.id} : ${f.path})');
                 }
                 map[f.id] = '\'${f.path}\'';
               }
@@ -344,7 +346,7 @@ class ConfigWriter extends Writer {
       for (var entry in translations.entries) {
         var translationKey = entry.key;
 
-        if (entry.value is Map){
+        if (entry.value is Map) {
           bool deepCheck = checkTranslationsForString(entry.value);
 
           if (deepCheck) {
@@ -356,7 +358,7 @@ class ConfigWriter extends Writer {
       }
 
       return result ?? input;
-    } catch(e) {
+    } catch (e) {
       print(e);
     }
 

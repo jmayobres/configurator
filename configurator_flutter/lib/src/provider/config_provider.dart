@@ -4,9 +4,8 @@ import 'package:flutter/widgets.dart';
 // final _configProviderKey = GlobalKey<_ConfigurationProviderState>();
 
 class Configurator extends StatefulWidget {
-
   final Configuration config;
-  final Widget Function( BuildContext, Configuration ) builder;
+  final Widget Function(BuildContext, Configuration) builder;
 
   const Configurator({
     required this.config,
@@ -19,18 +18,16 @@ class Configurator extends StatefulWidget {
 }
 
 class _ConfigurationProviderState extends State<Configurator> {
-
   @override
   void initState() {
-
-    widget.config.listenable().addListener( configListener );
+    widget.config.listenable().addListener(configListener);
 
     super.initState();
   }
 
   @override
   void dispose() {
-    widget.config.listenable().removeListener( configListener );
+    widget.config.listenable().removeListener(configListener);
     super.dispose();
   }
 
@@ -45,28 +42,26 @@ class _ConfigurationProviderState extends State<Configurator> {
     return ConfigurationProvider(
       config: widget.config,
       child: Builder(
-        builder: ( ctx ) => widget.builder( ctx, widget.config ),
+        builder: (ctx) => widget.builder(ctx, widget.config),
       ),
     );
   }
 }
 
-
 class ConfigurationProvider extends InheritedWidget {
-
   final Configuration config;
 
-  const ConfigurationProvider( {
+  const ConfigurationProvider({
     required this.config,
     required super.child,
     super.key,
-  } );
+  });
 
-  static ConfigurationProvider of( BuildContext context, { bool listen = true } ) {
+  static ConfigurationProvider of(BuildContext context, {bool listen = true}) {
+    final ConfigurationProvider? result =
+        context.findAncestorWidgetOfExactType();
 
-    final ConfigurationProvider? result = context.findAncestorWidgetOfExactType();
-
-    if ( listen ) {
+    if (listen) {
       context.dependOnInheritedWidgetOfExactType<ConfigurationProvider>();
     }
 
@@ -74,11 +69,12 @@ class ConfigurationProvider extends InheritedWidget {
     return result!;
   }
 
-  static ConfigurationProvider? maybeOf( BuildContext context, { bool listen = true } ) {
+  static ConfigurationProvider? maybeOf(BuildContext context,
+      {bool listen = true}) {
+    final ConfigurationProvider? result =
+        context.findAncestorWidgetOfExactType();
 
-    final ConfigurationProvider? result = context.findAncestorWidgetOfExactType();
-
-    if ( result != null && listen ) {
+    if (result != null && listen) {
       context.dependOnInheritedWidgetOfExactType<ConfigurationProvider>();
     }
 

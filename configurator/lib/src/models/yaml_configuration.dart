@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:configurator/configurator.dart';
 
 class YamlConfiguration {
-
   final String name;
   final List<String> partFiles;
   final int weight;
@@ -40,53 +39,52 @@ class YamlConfiguration {
     return {
       'partFiles': partFiles,
       'weight': weight,
-      'flags': { for (var e in flags) e.name: e.value},
-      'images': { for (var e in images) e.name: e.value},
-      'misc': { for (var e in misc) e.name: e.value},
-      'textStyles': { for (var e in textStyles) e.key: e.toJson()},
-      'sizes': { for (var e in sizes) e.name: e.value},
-      'colors': { for (var e in colors) e.name: e.value},
-      'routes': { for (var e in routes) e.id : e.path },
-      'strings': { for (var e in strings) e.name : e.value },
-      'padding': { for (var e in padding) e.name : e.value },
-      'margins': { for (var e in margins) e.name : e.value },
+      'flags': {for (var e in flags) e.name: e.value},
+      'images': {for (var e in images) e.name: e.value},
+      'misc': {for (var e in misc) e.name: e.value},
+      'textStyles': {for (var e in textStyles) e.key: e.toJson()},
+      'sizes': {for (var e in sizes) e.name: e.value},
+      'colors': {for (var e in colors) e.name: e.value},
+      'routes': {for (var e in routes) e.id: e.path},
+      'strings': {for (var e in strings) e.name: e.value},
+      'padding': {for (var e in padding) e.name: e.value},
+      'margins': {for (var e in margins) e.name: e.value},
     };
   }
 
-  operator +( YamlConfiguration t ) {
-    misc.removeWhere(( e ) => t.misc.contains( e ));
-    misc.addAll( t.misc );
+  operator +(YamlConfiguration t) {
+    misc.removeWhere((e) => t.misc.contains(e));
+    misc.addAll(t.misc);
 
-    textStyles.removeWhere(( e ) => t.textStyles.contains( e ));
-    textStyles.addAll( t.textStyles );
+    textStyles.removeWhere((e) => t.textStyles.contains(e));
+    textStyles.addAll(t.textStyles);
 
-    padding.removeWhere(( e ) => t.padding.contains( e ));
-    padding.addAll( t.padding );
+    padding.removeWhere((e) => t.padding.contains(e));
+    padding.addAll(t.padding);
 
-    margins.removeWhere(( e ) => t.margins.contains( e ));
-    margins.addAll( t.margins );
+    margins.removeWhere((e) => t.margins.contains(e));
+    margins.addAll(t.margins);
 
-    colors.removeWhere(( e ) => t.colors.contains( e ));
-    colors.addAll( t.colors );
+    colors.removeWhere((e) => t.colors.contains(e));
+    colors.addAll(t.colors);
 
-    sizes.removeWhere(( e ) => t.sizes.contains( e ));
-    sizes.addAll( t.sizes );
+    sizes.removeWhere((e) => t.sizes.contains(e));
+    sizes.addAll(t.sizes);
 
-    images.removeWhere(( e ) => t.images.contains( e ));
-    images.addAll( t.images );
+    images.removeWhere((e) => t.images.contains(e));
+    images.addAll(t.images);
 
-    flags.removeWhere(( e ) => t.flags.contains( e ));
-    flags.addAll( t.flags );
+    flags.removeWhere((e) => t.flags.contains(e));
+    flags.addAll(t.flags);
 
-    routes.removeWhere(( e ) => t.routes.contains( e ));
-    routes.addAll( t.routes );
+    routes.removeWhere((e) => t.routes.contains(e));
+    routes.addAll(t.routes);
 
-    strings.removeWhere(( e ) => t.strings.contains( e ));
-    strings.addAll( t.strings );
+    strings.removeWhere((e) => t.strings.contains(e));
+    strings.addAll(t.strings);
 
-    i18n.removeWhere(( e ) => t.i18n.contains( e ));
-    i18n.addAll( t.i18n );
-
+    i18n.removeWhere((e) => t.i18n.contains(e));
+    i18n.addAll(t.i18n);
 
     return this;
   }

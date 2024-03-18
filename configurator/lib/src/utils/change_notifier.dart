@@ -7,15 +7,16 @@ class ChangeNotifier {
   final StreamController<Configuration> _streamController;
 
   /// Not part of public API
-  ChangeNotifier() : _streamController = StreamController<Configuration>.broadcast();
+  ChangeNotifier()
+      : _streamController = StreamController<Configuration>.broadcast();
 
   /// Not part of public API
   @visibleForTesting
   ChangeNotifier.debug(this._streamController);
 
   /// Not part of public API
-  void notify( Configuration configuration ) {
-    _streamController.add( configuration );
+  void notify(Configuration configuration) {
+    _streamController.add(configuration);
   }
 
   /// Not part of public API

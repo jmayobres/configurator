@@ -1,9 +1,8 @@
 extension StringExtension on String {
-
   /// Capitalize the first character in a [String]
   String get capitalized {
     try {
-      return "${this[0].toUpperCase()}${ substring(1) }";
+      return "${this[0].toUpperCase()}${substring(1)}";
     } catch (e) {
       return this;
     }
@@ -13,10 +12,10 @@ extension StringExtension on String {
   String get camelCase {
     try {
       String s = replaceAllMapped(
-          RegExp(
-              r'[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+'),
+              RegExp(
+                  r'[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+'),
               (Match m) =>
-          "${m[0]?[0].toUpperCase()}${m[0]?.substring(1).toLowerCase()}")
+                  "${m[0]?[0].toUpperCase()}${m[0]?.substring(1).toLowerCase()}")
           .replaceAll(RegExp(r'(_|-|\s)+'), '');
 
       return s[0].toLowerCase() + s.substring(1);
@@ -25,7 +24,13 @@ extension StringExtension on String {
     }
   }
 
-  String get canonicalize => split('.').map((e) => e.capitalized).join('_').replaceAll(RegExp(r'[^\w\s]+'), '_').replaceFirst('_', '').camelCase;
+  String get canonicalize => split('.')
+      .map((e) => e.capitalized)
+      .join('_')
+      .replaceAll(RegExp(r'[^\w\s]+'), '_')
+      .replaceFirst('_', '')
+      .camelCase;
 
-  bool get isUrl => startsWith( 'http' ) && Uri.tryParse( this )?.isAbsolute == true;
+  bool get isUrl =>
+      startsWith('http') && Uri.tryParse(this)?.isAbsolute == true;
 }

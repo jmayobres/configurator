@@ -2,17 +2,16 @@ import 'package:code_builder/code_builder.dart';
 import 'package:configurator/src/writers/writer.dart';
 
 class TitleWriter extends Writer {
-
   final String title;
 
-  TitleWriter( this.title );
+  TitleWriter(this.title);
 
   @override
   Spec write() {
-    return Code( writeHeader( title ) );
+    return Code(writeHeader(title));
   }
 
-  String writeHeader( String header ) {
+  String writeHeader(String header) {
     StringBuffer sb = StringBuffer();
 
     sb.writeAll([

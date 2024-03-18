@@ -5,12 +5,10 @@ import 'package:configurator/src/utils/type_ext.dart';
 import 'package:configurator/src/writers/writer.dart';
 
 class ImageWriter extends Writer {
-
   final String name;
   final List<YamlSetting> _images;
 
-  ImageWriter( String name, this._images )
-      : name = name.canonicalize.capitalized;
+  ImageWriter(String name, this._images) : name = name.canonicalize.capitalized;
 
   @override
   Spec write() {
@@ -18,50 +16,49 @@ class ImageWriter extends Writer {
 
     Class config = _buildAccessor();
 
-    lb.body.add( config );
+    lb.body.add(config);
 
     return lb.build();
-
   }
 
   List<Method> _getGetters() {
     return _images.map((e) {
-      return Method( ( builder ) {
+      return Method((builder) {
         builder
           ..name = e.name
           ..type = MethodType.getter
-          ..returns = refer( e.value is List ? 'List<String>' : 'String' )
+          ..returns = refer(e.value is List ? 'List<String>' : 'String')
           ..lambda = true
-          ..body = Code( () {
-            if ( e.value is List ) {
+          ..body = Code(() {
+            if (e.value is List) {
               return '_config.imageList("${e.name}")';
             }
             return '_config.image("${e.name}")';
-          }() );
+          }());
       });
     }).toList();
   }
 
   Class _buildAccessor() {
-    return Class( ( builder ) {
+    return Class((builder) {
       builder
-        ..constructors.add( Constructor( ( b ) {
+        ..constructors.add(Constructor((b) {
           b
             ..constant = true
             ..requiredParameters.addAll([
-              Parameter( ( b ) {
+              Parameter((b) {
                 b
                   ..name = '_config'
                   ..toThis = true;
               }),
             ]);
-        }) )
+        }))
         ..name = '_ImageAccessor'
         ..fields.addAll([
-          Field( ( b ) {
+          Field((b) {
             b
               ..name = '_config'
-              ..type = refer( 'Configuration' )
+              ..type = refer('Configuration')
               ..modifier = FieldModifier.final$;
           }),
         ])

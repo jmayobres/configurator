@@ -1,7 +1,6 @@
 import 'package:configurator/configurator.dart';
 
 class ProxyScope extends ConfigScope {
-
   @override
   final String name;
 
@@ -56,5 +55,4 @@ class ProxyScope extends ConfigScope {
     this.textStyles = const {},
     this.translations = const {},
   });
-
 }

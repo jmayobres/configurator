@@ -5,11 +5,10 @@ import 'package:configurator/src/utils/type_ext.dart';
 import 'package:configurator/src/writers/writer.dart';
 
 class ColorWriter extends Writer {
-
   final String name;
   final List<YamlSetting<String, String>> _colors;
 
-  ColorWriter( String name, List<YamlSetting> colors )
+  ColorWriter(String name, List<YamlSetting> colors)
       : name = name.canonicalize.capitalized,
         _colors = colors.convert<String, String>();
 
@@ -19,47 +18,46 @@ class ColorWriter extends Writer {
 
     Class config = _buildAccessor();
 
-    lb.body.add( config );
+    lb.body.add(config);
 
     return lb.build();
-
   }
 
   List<Method> _getColorGetters() {
     return _colors.map((e) {
-      return Method( ( builder ) {
+      return Method((builder) {
         builder
           ..name = e.name.canonicalize
           ..type = MethodType.getter
           ..returns = refer('Color')
           ..lambda = true
-          ..body = Code( () {
+          ..body = Code(() {
             return '_config.colorValue( "${e.name}" )';
-          }() );
+          }());
       });
     }).toList();
   }
 
   Class _buildAccessor() {
-    return Class( ( builder ) {
+    return Class((builder) {
       builder
-        ..constructors.add( Constructor( ( b ) {
+        ..constructors.add(Constructor((b) {
           b
             ..constant = true
             ..requiredParameters.addAll([
-              Parameter( ( b ) {
+              Parameter((b) {
                 b
                   ..name = '_config'
                   ..toThis = true;
               }),
             ]);
-        }) )
+        }))
         ..name = '_ColorAccessor'
         ..fields.addAll([
-          Field( ( b ) {
+          Field((b) {
             b
               ..name = '_config'
-              ..type = refer( 'Configuration' )
+              ..type = refer('Configuration')
               ..modifier = FieldModifier.final$;
           }),
         ])
@@ -68,5 +66,4 @@ class ColorWriter extends Writer {
         ]);
     });
   }
-
 }

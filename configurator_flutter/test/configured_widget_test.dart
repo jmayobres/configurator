@@ -4,31 +4,26 @@ import 'package:configurator_flutter/configurator_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-
 void main() {
-
-  group( 'ConfiguredWidget Tests', () {
-
+  group('ConfiguredWidget Tests', () {
     testWidgets('Config.of Test', (tester) async {
-
       await tester.pumpWidget(
         ConfigurationProvider(
           config: Configuration(),
           child: ConfiguredWidget(
-            builder: ( _ ) =>  Container() ,
+            builder: (_) => Container(),
           ),
         ),
       );
 
       expect(
-            () => Config.of(tester.element(find.byType(Container))),
+        () => Config.of(tester.element(find.byType(Container))),
         isNotNull,
         reason: 'Configuration should not be null.',
       );
     });
 
-    testWidgets('Add Scope Rebuilds Test', ( WidgetTester tester) async {
-
+    testWidgets('Add Scope Rebuilds Test', (WidgetTester tester) async {
       Completer<Configuration> completer = Completer();
 
       int hitCount = 0;
@@ -37,16 +32,16 @@ void main() {
         ConfigurationProvider(
           config: Configuration(),
           child: ConfiguredWidget(
-            builder: ( config ) {
+            builder: (config) {
               hitCount++;
 
-              if ( hitCount == 1 ) {
+              if (hitCount == 1) {
                 var s1 = ProxyScope(name: 'test');
-                config.pushScope( s1 );
-              } else if ( hitCount == 2 ) {
-                completer.complete( config );
+                config.pushScope(s1);
+              } else if (hitCount == 2) {
+                completer.complete(config);
               } else {
-                throw Exception( 'Should not be hit a 3rd time.' );
+                throw Exception('Should not be hit a 3rd time.');
               }
 
               return Container();
@@ -57,8 +52,8 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await expectLater( completer.future, completion( isNotNull ) ).timeout( const Duration( seconds: 1 ) );
-
+      await expectLater(completer.future, completion(isNotNull))
+          .timeout(const Duration(seconds: 1));
     });
   });
 }

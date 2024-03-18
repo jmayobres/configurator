@@ -195,15 +195,15 @@ class YamlParser {
       //      );
       //    }
       // } else
-        if (es.value is Map) {
-         result.addAll(
-           _getSettingNamespaces(
-             es.value,
-             [],
-             '${path.capitalized}_${es.key.capitalized}'.canonicalize,
-           ),
-         );
-       } else {
+      if (es.value is Map) {
+        result.addAll(
+          _getSettingNamespaces(
+            es.value,
+            [],
+            '${path.capitalized}_${es.key.capitalized}'.canonicalize,
+          ),
+        );
+      } else {
         result.add(
           YamlSetting(
             '${path.capitalized}_${es.key.capitalized}'.canonicalize,

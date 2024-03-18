@@ -35,7 +35,7 @@ class TextStyleWriter extends Writer {
             lines.add('..._config.textStyle("${e.key}")["typeface"],');
           }
 
-          return '''                
+          return '''
             return {
               ${lines.join('\n')}
             };

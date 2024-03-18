@@ -1,9 +1,8 @@
 class YamlSetting<K, V> {
-
   final K name;
   final V value;
 
-  YamlSetting( this.name, this.value );
+  YamlSetting(this.name, this.value);
 
   @override
   bool operator ==(Object other) =>
